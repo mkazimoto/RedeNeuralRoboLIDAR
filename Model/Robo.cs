@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -86,6 +87,8 @@ namespace RedeNeuralTreinamento.Model
       LastX = X;
       LastY = Y;
 
+      var raio = Diameter / 2;
+
       // Movimenta o robô
       switch (key)
       {
@@ -105,6 +108,20 @@ namespace RedeNeuralTreinamento.Model
           break;
       }
 
+      if (X - raio < 0) 
+        X = raio;
+
+      if (Y - raio < 0)
+        Y = raio;
+
+      if (X + raio > mapa.Width) 
+        X = mapa.Width - raio;
+
+      if (Y + raio > mapa.Height)
+        Y = mapa.Height - raio;
+
+      RaioLIDAR colisao = null;
+
       // Verifica a colisão do sensor LIDAR
       foreach (var ray in LidarColision)
       {
@@ -117,6 +134,21 @@ namespace RedeNeuralTreinamento.Model
 
         // Calcula a distancia 
         ray.Distance = Math.Sqrt(Math.Pow(Math.Abs(ray.Destiny.X - X), 2) + Math.Pow(Math.Abs(ray.Destiny.Y - Y), 2));      
+
+        // Houve colisao do robo com a parede ?
+        if (ray.Distance <= raio)
+        {
+          colisao = ray;
+        }
+      }
+
+      if (colisao != null)
+      {
+        SystemSounds.Exclamation.Play();
+
+        // Afasta do ponto de colisão
+        X -= Math.Cos(Rotation + colisao.AngleRadians) * Speed;
+        Y -= Math.Sin(Rotation + colisao.AngleRadians) * Speed;
       }
 
     }

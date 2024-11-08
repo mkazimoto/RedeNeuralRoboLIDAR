@@ -120,12 +120,15 @@ namespace RedeNeuralTreinamento
       // O robo está parado ?
       if (robo.LastX == robo.X &&
           robo.LastY == robo.Y &&
-          robo.lastKey != robo.key)
+          robo.lastKey != robo.key &&
+          index != 0)
       {
         contadorParado++;
         if (contadorParado > 1)
         {
           contadorParado = 0;
+
+          // Força o robo andar para frente
           index = 0;
         }
       }
