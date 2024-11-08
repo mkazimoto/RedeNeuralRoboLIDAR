@@ -142,6 +142,7 @@ namespace RedeNeuralTreinamento.Model
         }
       }
 
+      // Houve colisao do robo com a parede ?
       if (colisao != null)
       {
         SystemSounds.Exclamation.Play();
