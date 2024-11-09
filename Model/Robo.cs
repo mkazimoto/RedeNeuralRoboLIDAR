@@ -29,7 +29,23 @@ namespace RedeNeuralTreinamento.Model
     /// <summary>
     /// Diametro do robo
     /// </summary>
-    public int Diameter { get; set; }
+    public int Diameter { 
+      get
+      {
+        return _diameter;
+      }
+      set
+      {
+        _diameter = value;
+        Radius = value / 2;
+      }
+    }
+    private int _diameter;
+
+    /// <summary>
+    /// Raio do robo
+    /// </summary>
+    public int Radius { get; set; }
 
     /// <summary>
     /// Angulo de rotação em radianos
@@ -87,8 +103,6 @@ namespace RedeNeuralTreinamento.Model
       LastX = X;
       LastY = Y;
 
-      var raio = Diameter / 2;
-
       // Movimenta o robô
       switch (key)
       {
@@ -108,17 +122,17 @@ namespace RedeNeuralTreinamento.Model
           break;
       }
 
-      if (X - raio < 0) 
-        X = raio;
+      if (X - Radius < 0) 
+        X = Radius;
 
-      if (Y - raio < 0)
-        Y = raio;
+      if (Y - Radius < 0)
+        Y = Radius;
 
-      if (X + raio > mapa.Width) 
-        X = mapa.Width - raio;
+      if (X + Radius > mapa.Width) 
+        X = mapa.Width - Radius;
 
-      if (Y + raio > mapa.Height)
-        Y = mapa.Height - raio;
+      if (Y + Radius > mapa.Height)
+        Y = mapa.Height - Radius;
 
       RaioLIDAR colisao = null;
 
@@ -136,7 +150,7 @@ namespace RedeNeuralTreinamento.Model
         ray.Distance = Math.Sqrt(Math.Pow(Math.Abs(ray.Destiny.X - X), 2) + Math.Pow(Math.Abs(ray.Destiny.Y - Y), 2));      
 
         // Houve colisao do robo com a parede ?
-        if (ray.Distance <= raio)
+        if (ray.Distance <= Radius)
         {
           colisao = ray;
         }
@@ -163,12 +177,10 @@ namespace RedeNeuralTreinamento.Model
         g.DrawEllipse(Pens.Red, pontoColisao.Destiny.X - 10, pontoColisao.Destiny.Y - 10, 20, 20);
       }
 
-      var raio = Diameter / 2;
-
       // Desenha robo
-      g.FillEllipse(Brushes.Blue, (int)X - raio, (int)Y - raio, Diameter, Diameter);
-      g.DrawEllipse(Pens.Black, (int)X - raio, (int)Y - raio, Diameter, Diameter);
-      g.DrawLine(Pens.Black, (int)X, (int)Y, (int)(X + Math.Cos(Rotation) * raio), (int)(Y + Math.Sin(Rotation) * raio));  
+      g.FillEllipse(Brushes.Blue, (int)X - Radius, (int)Y - Radius, Diameter, Diameter);
+      g.DrawEllipse(Pens.Black, (int)X - Radius, (int)Y - Radius, Diameter, Diameter);
+      g.DrawLine(Pens.Black, (int)X, (int)Y, (int)(X + Math.Cos(Rotation) * Radius), (int)(Y + Math.Sin(Rotation) * Radius));  
     }
 
     public double[] GetInputs()
