@@ -66,8 +66,6 @@ namespace RedeNeuralTreinamento
         outputSize = 3, // Up, Right, Left
       };
 
-      redeNeural.Init();
-
       // Carrega a rede neural do arquivo
       if (File.Exists(@"RedeNeural\RedeNeural.dat"))
       {
@@ -117,21 +115,21 @@ namespace RedeNeuralTreinamento
         }
       }
 
-      // O robo está parado ?
-      if (robo.LastX == robo.X &&
-          robo.LastY == robo.Y &&
-          robo.lastKey != robo.key &&
-          index != 0)
-      {
-        contadorParado++;
-        if (contadorParado > 1)
-        {
-          contadorParado = 0;
+      //// O robo está parado ?
+      //if (robo.LastX == robo.X &&
+      //    robo.LastY == robo.Y &&
+      //    robo.lastKey != robo.key &&
+      //    index != 0)
+      //{
+      //  contadorParado++;
+      //  if (contadorParado > 1)
+      //  {
+      //    contadorParado = 0;
 
-          // Força o robo andar para frente
-          index = 0;
-        }
-      }
+      //    // Força o robo andar para frente
+      //    index = 0;
+      //  }
+      //}
 
       lblSaidaUp.Text = outputs[0].ToString("F4");
       lblSaidaRight.Text = outputs[1].ToString("F4");
@@ -212,27 +210,38 @@ namespace RedeNeuralTreinamento
 
       if (e.KeyCode == Keys.D1)
       {
-        listRegistros.Clear();
-        status = Status.Gravando;
-        pbStatus.BackColor = Color.Red;
-        lblStatus.Text = "Gravando... utilize as setas para controlar o robô...";
+        if (status != Status.Gravando)
+        {
+          status = Status.Gravando;
+          listRegistros.Clear();
+
+          pbStatus.BackColor = Color.Red;
+          lblStatus.Text = "Gravando... utilize as setas para controlar o robô...";
+        }
       }
 
       if (e.KeyCode == Keys.D2)
       {
-        status = Status.Treinamento;
-        pbStatus.BackColor = Color.Yellow;
-        lblStatus.Text = "Treinando rede neural...";
+        if (status != Status.Treinamento)
+        {
+          if (listRegistros.Count == 0)
+            return;
 
-        Application.DoEvents();
+          status = Status.Treinamento;
+          pbStatus.BackColor = Color.Yellow;
+          lblStatus.Text = "Treinando rede neural...";
 
-        redeNeural.Treinamento(listRegistros.Select(p => p.inputs).ToArray(), 
-                               listRegistros.Select(p => p.outputs).ToArray());
+          Application.DoEvents();
 
+          redeNeural.Treinamento(listRegistros.Select(p => p.inputs).ToArray(),
+                                 listRegistros.Select(p => p.outputs).ToArray());
 
-        status = Status.ExecutandoRedeNeural;
-        pbStatus.BackColor = Color.Green;
-        lblStatus.Text = "Executando rede neural...";
+          redeNeural.Save(@"RedeNeural\RedeNeural.dat");
+
+          status = Status.ExecutandoRedeNeural;
+          pbStatus.BackColor = Color.Green;
+          lblStatus.Text = "Executando rede neural...";
+        }
       }
 
 

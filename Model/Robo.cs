@@ -107,10 +107,10 @@ namespace RedeNeuralTreinamento.Model
       switch (key)
       {
         case Keys.Left:
-          Rotation -= Math.PI / 360;
+          Rotation -= Math.PI / 180;
           break;
         case Keys.Right:
-          Rotation += Math.PI / 360;
+          Rotation += Math.PI / 180;
           break;
         case Keys.Down:
           X -= Math.Cos(Rotation) * Speed;
@@ -185,7 +185,7 @@ namespace RedeNeuralTreinamento.Model
 
     public double[] GetInputs()
     {
-      return LidarColision.Select(p => p.Distance / 2000).Select(p => (p > 1.0) ? 1.0 : p).ToArray();
+      return LidarColision.Select(p => p.Distance / (double)600).Select(p => (p > 1.0) ? 1.0 : p).ToArray();
     }
   }
 }
