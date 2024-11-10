@@ -1,19 +1,12 @@
-﻿using Accord.Neuro.Learning;
-using Accord.Neuro;
+﻿using RedeNeuralTreinamento.Model;
+using RedeNeuralTreinamento.Service;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using RedeNeuralTreinamento.Model;
-using RedeNeuralTreinamento.Service;
-using System.Xml;
-using System.Threading;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace RedeNeuralTreinamento
 {
@@ -115,25 +108,30 @@ namespace RedeNeuralTreinamento
         }
       }
 
-      //// O robo está parado ?
-      //if (robo.LastX == robo.X &&
-      //    robo.LastY == robo.Y &&
-      //    robo.lastKey != robo.key &&
-      //    index != 0)
-      //{
-      //  contadorParado++;
-      //  if (contadorParado > 1)
-      //  {
-      //    contadorParado = 0;
+      Color colorUp = Color.LightGray;
+      Color colorRight = Color.LightGray;
+      Color colorLeft = Color.LightGray;
 
-      //    // Força o robo andar para frente
-      //    index = 0;
-      //  }
-      //}
-
+      switch (index)
+      {
+        case 0:
+          colorUp = Color.Yellow;
+          break;
+        case 1:
+          colorRight = Color.Yellow;
+          break;
+        case 2:
+          colorLeft = Color.Yellow;
+          break;
+      }
       lblSaidaUp.Text = outputs[0].ToString("F4");
+      lblSaidaUp.BackColor = colorUp;
+
       lblSaidaRight.Text = outputs[1].ToString("F4");
+      lblSaidaRight.BackColor = colorRight;
+
       lblSaidaLeft.Text = outputs[2].ToString("F4");
+      lblSaidaLeft.BackColor = colorLeft;
 
       robo.lastKey = robo.key;
       switch (index)
@@ -285,6 +283,7 @@ namespace RedeNeuralTreinamento
         e.Handled = true;
       }
     }
+
   }
 }
 

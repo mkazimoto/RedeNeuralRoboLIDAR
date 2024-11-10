@@ -68,7 +68,7 @@ namespace RedeNeuralTreinamento.Model
         LidarColision.Clear();
         _numberLasers = value;
 
-        double angle = -90;
+        double angle = 270;
         for (int i = 0; i < _numberLasers; i++) 
         {
           LidarColision.Add(new RaioLIDAR()
@@ -78,11 +78,15 @@ namespace RedeNeuralTreinamento.Model
           });
 
           angle += (double)180 / ((double)_numberLasers - (double)1);
+          angle = angle % 360;
         }
       }
     }
     private int _numberLasers;
 
+    /// <summary>
+    /// Lista de lasers do sensor LIDAR
+    /// </summary>
     public List<RaioLIDAR> LidarColision { get; set; } = new List<RaioLIDAR>();
 
     /// <summary>

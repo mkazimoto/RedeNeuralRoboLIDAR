@@ -39,6 +39,8 @@
       this.lblSaidaUp = new System.Windows.Forms.Label();
       this.lblSaidaRight = new System.Windows.Forms.Label();
       this.lblSaidaLeft = new System.Windows.Forms.Label();
+      this.label3 = new System.Windows.Forms.Label();
+      this.label4 = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pbStatus)).BeginInit();
       this.SuspendLayout();
@@ -92,44 +94,67 @@
       // label2
       // 
       this.label2.AutoSize = true;
-      this.label2.Location = new System.Drawing.Point(605, 22);
+      this.label2.Location = new System.Drawing.Point(602, 22);
       this.label2.Name = "label2";
-      this.label2.Size = new System.Drawing.Size(44, 13);
+      this.label2.Size = new System.Drawing.Size(48, 13);
       this.label2.TabIndex = 4;
-      this.label2.Text = "Saídas:";
+      this.label2.Text = "Forward:";
       // 
       // lblSaidaUp
       // 
       this.lblSaidaUp.AutoSize = true;
+      this.lblSaidaUp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.lblSaidaUp.Location = new System.Drawing.Point(605, 48);
       this.lblSaidaUp.Name = "lblSaidaUp";
-      this.lblSaidaUp.Size = new System.Drawing.Size(21, 13);
+      this.lblSaidaUp.Size = new System.Drawing.Size(23, 15);
       this.lblSaidaUp.TabIndex = 5;
       this.lblSaidaUp.Text = "Up";
       // 
       // lblSaidaRight
       // 
       this.lblSaidaRight.AutoSize = true;
+      this.lblSaidaRight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.lblSaidaRight.Location = new System.Drawing.Point(703, 48);
       this.lblSaidaRight.Name = "lblSaidaRight";
-      this.lblSaidaRight.Size = new System.Drawing.Size(32, 13);
+      this.lblSaidaRight.Size = new System.Drawing.Size(34, 15);
       this.lblSaidaRight.TabIndex = 6;
       this.lblSaidaRight.Text = "Right";
       // 
       // lblSaidaLeft
       // 
       this.lblSaidaLeft.AutoSize = true;
+      this.lblSaidaLeft.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.lblSaidaLeft.Location = new System.Drawing.Point(802, 48);
       this.lblSaidaLeft.Name = "lblSaidaLeft";
-      this.lblSaidaLeft.Size = new System.Drawing.Size(25, 13);
+      this.lblSaidaLeft.Size = new System.Drawing.Size(27, 15);
       this.lblSaidaLeft.TabIndex = 7;
       this.lblSaidaLeft.Text = "Left";
+      // 
+      // label3
+      // 
+      this.label3.AutoSize = true;
+      this.label3.Location = new System.Drawing.Point(700, 22);
+      this.label3.Name = "label3";
+      this.label3.Size = new System.Drawing.Size(60, 13);
+      this.label3.TabIndex = 8;
+      this.label3.Text = "Turn Right:";
+      // 
+      // label4
+      // 
+      this.label4.AutoSize = true;
+      this.label4.Location = new System.Drawing.Point(799, 22);
+      this.label4.Name = "label4";
+      this.label4.Size = new System.Drawing.Size(53, 13);
+      this.label4.TabIndex = 9;
+      this.label4.Text = "Turn Left:";
       // 
       // FormMain
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(1135, 866);
+      this.Controls.Add(this.label4);
+      this.Controls.Add(this.label3);
       this.Controls.Add(this.lblSaidaLeft);
       this.Controls.Add(this.lblSaidaRight);
       this.Controls.Add(this.lblSaidaUp);
@@ -161,6 +186,8 @@
     private System.Windows.Forms.Label lblSaidaUp;
     private System.Windows.Forms.Label lblSaidaRight;
     private System.Windows.Forms.Label lblSaidaLeft;
+    private System.Windows.Forms.Label label3;
+    private System.Windows.Forms.Label label4;
   }
 }
 

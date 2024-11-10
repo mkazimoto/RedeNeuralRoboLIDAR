@@ -27,5 +27,10 @@ namespace RedeNeuralTreinamento.Model
     public double Distance { get; set; }
 
     public RaioLIDAR() { }
+
+    public override string ToString()
+    {
+      return $"Angle: {Angle} - Distance: {Distance}";
+    }
   }
 }
