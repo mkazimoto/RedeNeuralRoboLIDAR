@@ -59,6 +59,8 @@ namespace RedeNeuralTreinamento
         outputSize = 3, // Up, Right, Left
       };
 
+      lblEntradas.Text = redeNeural.inputSize.ToString();
+
       // Carrega a rede neural do arquivo
       if (File.Exists(@"RedeNeural\RedeNeural.dat"))
       {

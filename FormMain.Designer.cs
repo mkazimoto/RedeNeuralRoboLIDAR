@@ -41,6 +41,8 @@
       this.lblSaidaLeft = new System.Windows.Forms.Label();
       this.label3 = new System.Windows.Forms.Label();
       this.label4 = new System.Windows.Forms.Label();
+      this.lblEntradas = new System.Windows.Forms.Label();
+      this.label6 = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.pbStatus)).BeginInit();
       this.SuspendLayout();
@@ -148,11 +150,32 @@
       this.label4.TabIndex = 9;
       this.label4.Text = "Turn Left:";
       // 
+      // lblEntradas
+      // 
+      this.lblEntradas.AutoSize = true;
+      this.lblEntradas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.lblEntradas.Location = new System.Drawing.Point(435, 48);
+      this.lblEntradas.Name = "lblEntradas";
+      this.lblEntradas.Size = new System.Drawing.Size(21, 15);
+      this.lblEntradas.TabIndex = 11;
+      this.lblEntradas.Text = "32";
+      // 
+      // label6
+      // 
+      this.label6.AutoSize = true;
+      this.label6.Location = new System.Drawing.Point(432, 22);
+      this.label6.Name = "label6";
+      this.label6.Size = new System.Drawing.Size(52, 13);
+      this.label6.TabIndex = 10;
+      this.label6.Text = "Entradas:";
+      // 
       // FormMain
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(1135, 866);
+      this.Controls.Add(this.lblEntradas);
+      this.Controls.Add(this.label6);
       this.Controls.Add(this.label4);
       this.Controls.Add(this.label3);
       this.Controls.Add(this.lblSaidaLeft);
@@ -165,7 +188,7 @@
       this.Controls.Add(this.pictureBox1);
       this.Name = "FormMain";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-      this.Text = "Rede Neural do Robô com sensor LIDAR";
+      this.Text = "Rede Neural controlando o robô com sensor LIDAR";
       this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
       this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -188,6 +211,8 @@
     private System.Windows.Forms.Label lblSaidaLeft;
     private System.Windows.Forms.Label label3;
     private System.Windows.Forms.Label label4;
+    private System.Windows.Forms.Label lblEntradas;
+    private System.Windows.Forms.Label label6;
   }
 }
 
