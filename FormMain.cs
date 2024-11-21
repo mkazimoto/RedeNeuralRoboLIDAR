@@ -65,6 +65,9 @@ namespace RedeNeuralTreinamento
       if (File.Exists(@"RedeNeural\RedeNeural.dat"))
       {
         CarregarArquivoRedeNeural();
+
+        RedeNeural.SaveNetworkToJson(redeNeural.network, @"RedeNeural\RedeNeural.json");
+
       }
     }
 

@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Security.Policy;
 using System.CodeDom.Compiler;
 using RedeNeuralTreinamento.Model;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace RedeNeuralTreinamento.Service
 {
@@ -81,5 +83,69 @@ namespace RedeNeuralTreinamento.Service
       return results;
     }
 
+    public static void SaveNetworkToJson(ActivationNetwork network, string filePath)
+    {
+      // Extrair pesos e vieses das camadas
+      var weightsInputHidden = ExtractWeights((ActivationLayer)network.Layers[0]);
+      var weightsHiddenOutput = ExtractWeights((ActivationLayer)network.Layers[1]);
+      var biasHidden = ExtractBiases((ActivationLayer)network.Layers[0]);
+      var biasOutput = ExtractBiases((ActivationLayer)network.Layers[1]);
+
+      // Estruturar o JSON
+      var jsonData = new NeuralNetworkJson()
+      {
+        weightsInputHidden = weightsInputHidden,
+        weightsHiddenOutput = weightsHiddenOutput,
+        biasHidden = biasHidden,
+        biasOutput = biasOutput
+      };
+
+      // Serializar e salvar no arquivo
+      string json = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
+      File.WriteAllText(filePath, json);
+    }
+
+    // Método para extrair os pesos de uma camada
+    public static double[][] ExtractWeights(ActivationLayer layer)
+    {
+      int neuronCount = layer.Neurons.Length;
+      int inputCount = layer.Neurons[0].Weights.Length;
+      double[][] weights = new double[neuronCount][];
+
+      for (int i = 0; i < neuronCount; i++)
+      {
+        weights[i] = new double[inputCount];
+        for (int j = 0; j < inputCount; j++)
+        {
+          weights[i][j] = layer.Neurons[i].Weights[j];
+        }
+      }
+
+      return weights;
+    }
+
+    // Método para extrair os vieses de uma camada
+    public static double[] ExtractBiases(ActivationLayer layer)
+    {
+      int neuronCount = layer.Neurons.Length;
+      double[] biases = new double[neuronCount];
+
+      for (int i = 0; i < neuronCount; i++)
+      {
+         biases[i] = ((ActivationNeuron)layer.Neurons[i]).Threshold;
+      }
+
+      return biases;
+    }
+
+  }
+
+  // Classe para representar o JSON
+  public class NeuralNetworkJson
+  {
+    public double[][] weightsInputHidden { get; set; }
+    public double[][] weightsHiddenOutput { get; set; }
+    public double[] biasHidden { get; set; }
+    public double[] biasOutput { get; set; }
   }
 }
