@@ -1,4 +1,4 @@
-* Use the Library:
+* Uses the Library:
   * Accord.NET  
 * Neural Network
   * Inputs: 32 (distances of LIDAR)
