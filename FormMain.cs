@@ -55,7 +55,7 @@ namespace RedeNeuralTreinamento
       redeNeural = new RedeNeural()
       {
         inputSize = robo.NumberLasers, // Distancia dos lasers
-        hiddenSize = 8,
+        hiddenSize = 10,
         outputSize = 3, // Up, Right, Left
       };
 
@@ -129,14 +129,19 @@ namespace RedeNeuralTreinamento
           colorLeft = Color.Yellow;
           break;
       }
-      lblSaidaUp.Text = outputs[0].ToString("F4");
-      lblSaidaUp.BackColor = colorUp;
 
-      lblSaidaRight.Text = outputs[1].ToString("F4");
-      lblSaidaRight.BackColor = colorRight;
+      if (outputs.Length > 0)
+      {
 
-      lblSaidaLeft.Text = outputs[2].ToString("F4");
-      lblSaidaLeft.BackColor = colorLeft;
+        lblSaidaUp.Text = outputs[0].ToString("F4");
+        lblSaidaUp.BackColor = colorUp;
+
+        lblSaidaRight.Text = outputs[1].ToString("F4");
+        lblSaidaRight.BackColor = colorRight;
+
+        lblSaidaLeft.Text = outputs[2].ToString("F4");
+        lblSaidaLeft.BackColor = colorLeft;
+      }
 
       robo.lastKey = robo.key;
       switch (index)
@@ -239,7 +244,7 @@ namespace RedeNeuralTreinamento
           redeNeural.Treinamento(listRegistros.Select(p => p.inputs).ToArray(),
                                  listRegistros.Select(p => p.outputs).ToArray());
 
-          redeNeural.Save(@"RedeNeural\RedeNeural.dat");
+          redeNeural.Save(@"RedeNeural\RedeNeural2.json");
 
           status = Status.ExecutandoRedeNeural;
           pbStatus.BackColor = Color.Green;

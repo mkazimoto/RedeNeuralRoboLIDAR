@@ -32,10 +32,10 @@ namespace NeuralNetwork
     // Método para inicializar matriz
     private double[,] InitializeMatrix(int rows, int cols, Random rand)
     {
-      double[,] matrix = new double[rows, cols];
+      double[,] matrix = new double[cols, rows];
       for (int i = 0; i < rows; i++)
         for (int j = 0; j < cols; j++)
-          matrix[i, j] = rand.NextDouble() * 2 - 1; // Valores entre -1 e 1
+          matrix[j, i] = rand.NextDouble() * 2 - 1; // Valores entre -1 e 1
       return matrix;
     }
 
@@ -89,7 +89,7 @@ namespace NeuralNetwork
       {
         double sum = biasHidden[j];
         for (int i = 0; i < inputSize; i++)
-          sum += input[i] * weightsInputHidden[i, j];
+          sum += input[i] * weightsInputHidden[j, i];
         hiddenLayer[j] = Sigmoid(sum);
       }
 
@@ -98,7 +98,7 @@ namespace NeuralNetwork
       {
         double sum = biasOutput[k];
         for (int j = 0; j < hiddenSize; j++)
-          sum += hiddenLayer[j] * weightsHiddenOutput[j, k];
+          sum += hiddenLayer[j] * weightsHiddenOutput[k, j];
         outputLayer[k] = sum;
       }
 
@@ -112,7 +112,7 @@ namespace NeuralNetwork
       {
         double sum = 0;
         for (int k = 0; k < outputSize; k++)
-          sum += outputError[k] * weightsHiddenOutput[j, k];
+          sum += outputError[k] * weightsHiddenOutput[k, j];
         hiddenError[j] = sum * SigmoidDerivative(hiddenLayer[j]);
       }
 
@@ -121,7 +121,7 @@ namespace NeuralNetwork
       {
         biasOutput[k] += learningRate * outputError[k];
         for (int j = 0; j < hiddenSize; j++)
-          weightsHiddenOutput[j, k] += learningRate * outputError[k] * hiddenLayer[j];
+          weightsHiddenOutput[k, j] += learningRate * outputError[k] * hiddenLayer[j];
       }
 
       // Atualiza pesos e bias da camada oculta para entrada
@@ -129,7 +129,7 @@ namespace NeuralNetwork
       {
         biasHidden[j] += learningRate * hiddenError[j];
         for (int i = 0; i < inputSize; i++)
-          weightsInputHidden[i, j] += learningRate * hiddenError[j] * input[i];
+          weightsInputHidden[j, i] += learningRate * hiddenError[j] * input[i];
       }
     }
 
