@@ -62,11 +62,11 @@ namespace RedeNeuralTreinamento
       lblEntradas.Text = redeNeural.inputSize.ToString();
 
       // Carrega a rede neural do arquivo
-      if (File.Exists(@"RedeNeural\RedeNeural.dat"))
+      if (File.Exists(@"RedeNeural\RedeNeural.json"))
       {
         CarregarArquivoRedeNeural();
 
-        RedeNeural.SaveNetworkToJson(redeNeural.network, @"RedeNeural\RedeNeural.json");
+       // RedeNeural.SaveNetworkToJson(redeNeural.network, @"RedeNeural\RedeNeural.json");
 
       }
     }
@@ -269,7 +269,7 @@ namespace RedeNeuralTreinamento
     private void CarregarArquivoRedeNeural()
     {
       redeNeural = new RedeNeural();
-      redeNeural.Load(@"RedeNeural\RedeNeural.dat");
+      redeNeural.Load(@"RedeNeural\RedeNeural.json");
 
       status = Status.ExecutandoRedeNeural;
       pbStatus.BackColor = Color.Green;

@@ -35,7 +35,7 @@ namespace NeuralNetwork
       double[,] matrix = new double[rows, cols];
       for (int i = 0; i < rows; i++)
         for (int j = 0; j < cols; j++)
-          matrix[i, j] = rand.NextDouble() * 2.0 - 1.0; // Valores entre -1 e 1
+          matrix[i, j] = rand.NextDouble() * 2 - 1; // Valores entre -1 e 1
       return matrix;
     }
 
@@ -44,15 +44,15 @@ namespace NeuralNetwork
     {
       double[] vector = new double[size];
       for (int i = 0; i < size; i++)
-        vector[i] = rand.NextDouble() * 2.0 - 1.0;
+        vector[i] = rand.NextDouble() * 2 - 1;
       return vector;
     }
 
     // Função de ativação sigmoid
-    private double Sigmoid(double x) => 1.0 / (1.0 + Math.Exp(-x));
+    private double Sigmoid(double x) => 1 / (1 + Math.Exp(-x));
 
     // Derivada da função sigmoid
-    private double SigmoidDerivative(double x) => x * (1.0 - x);
+    private double SigmoidDerivative(double x) => x * (1 - x);
 
     // Forward Pass
     public double[] Forward(double[] input)
@@ -63,7 +63,7 @@ namespace NeuralNetwork
       {
         double sum = biasHidden[j];
         for (int i = 0; i < inputSize; i++)
-          sum += input[i] * weightsInputHidden[i, j];
+          sum += input[i] * weightsInputHidden[j, i];
         hiddenLayer[j] = Sigmoid(sum);
       }
 
@@ -73,7 +73,7 @@ namespace NeuralNetwork
       {
         double sum = biasOutput[k];
         for (int j = 0; j < hiddenSize; j++)
-          sum += hiddenLayer[j] * weightsHiddenOutput[j, k];
+          sum += hiddenLayer[j] * weightsHiddenOutput[k, j];
         outputLayer[k] = sum; // Ativação linear
       }
 

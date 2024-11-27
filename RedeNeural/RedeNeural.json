@@ -1,4 +1,8 @@
 {
+  "inputSize": 32,
+  "hiddenSize": 10,
+  "outputSize": 3,
+
   "weightsInputHidden": [
     [
       4.9115006128737511,
