@@ -1,5 +1,3 @@
-* Uses the Library:
-  * Accord.NET  
 * Neural Network
   * Inputs: 32 (distances of LIDAR)
   * Outputs: 3 (forward, turn right, turn left)
