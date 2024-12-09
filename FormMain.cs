@@ -1,4 +1,5 @@
-﻿using RedeNeuralTreinamento.Model;
+﻿using NeuralNetwork;
+using RedeNeuralTreinamento.Model;
 using RedeNeuralTreinamento.Service;
 using System;
 using System.Collections.Generic;
@@ -293,6 +294,44 @@ namespace RedeNeuralTreinamento
         e.Handled = true;
       }
     }
+
+    //void TreinamentoAlgoritmoGenetico()
+    //{
+    //  int inputSize = 2, hiddenSize = 4, outputSize = 1;
+    //  int populationSize = 100, generations = 100;
+    //  double mutationRate = 0.1;
+
+    //  var ga = new RedeNeuralTreinamento.AlgoritmoGenetico.AlgoritmoGenetico();
+    //  var bestNetwork = ga.Run(
+    //      inputSize,
+    //      hiddenSize,
+    //      outputSize,
+    //      populationSize,
+    //      generations,
+    //      EvaluateNetwork,
+    //      mutationRate
+    //  );
+
+    //  Console.WriteLine("Treinamento finalizado. Melhor rede encontrada.");
+    //}
+
+
+    //// Função de avaliação
+    //static double EvaluateNetwork(NeuralNetworkClass network)
+    //{
+    //  // Exemplo: XOR
+    //  var inputs = new[] { new[] { 0.0, 0.0 }, new[] { 0.0, 1.0 }, new[] { 1.0, 0.0 }, new[] { 1.0, 1.0 } };
+    //  var targets = new[] { 0.0, 1.0, 1.0, 0.0 };
+
+    //  double error = 0.0;
+    //  for (int i = 0; i < inputs.Length; i++)
+    //  {
+    //    var output = network.Forward(inputs[i])[0];
+    //    error += Math.Pow(targets[i] - output, 2); // Erro quadrático
+    //  }
+
+    //  return -error; // Fitness é negativo do erro
+    //}
 
   }
 }

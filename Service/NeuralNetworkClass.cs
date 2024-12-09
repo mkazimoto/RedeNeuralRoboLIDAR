@@ -10,10 +10,10 @@ namespace NeuralNetwork
     private int hiddenSize;
     private int outputSize;
 
-    private double[,] weightsInputHidden;
-    private double[,] weightsHiddenOutput;
-    private double[] biasHidden;
-    private double[] biasOutput;
+    public double[,] weightsInputHidden;
+    public double[,] weightsHiddenOutput;
+    public double[] biasHidden;
+    public double[] biasOutput;
 
     public NeuralNetworkClass(int inputSize, int hiddenSize, int outputSize)
     {
@@ -27,7 +27,7 @@ namespace NeuralNetwork
       weightsHiddenOutput = InitializeMatrix(hiddenSize, outputSize, rand);
       biasHidden = InitializeVector(hiddenSize, rand);
       biasOutput = InitializeVector(outputSize, rand);
-    }
+    }  
 
     // Método para inicializar matriz
     private double[,] InitializeMatrix(int rows, int cols, Random rand)
