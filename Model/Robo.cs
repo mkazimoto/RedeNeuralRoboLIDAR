@@ -104,6 +104,13 @@ namespace RedeNeuralTreinamento.Model
 
     public void Run()
     {
+      Move();
+
+      CheckColision();
+    }
+
+    private void Move()
+    {
       LastX = X;
       LastY = Y;
 
@@ -126,32 +133,35 @@ namespace RedeNeuralTreinamento.Model
           break;
       }
 
-      if (X - Radius < 0) 
+      if (X - Radius < 0)
         X = Radius;
 
       if (Y - Radius < 0)
         Y = Radius;
 
-      if (X + Radius > mapa.Width) 
+      if (X + Radius > mapa.Width)
         X = mapa.Width - Radius;
 
       if (Y + Radius > mapa.Height)
         Y = mapa.Height - Radius;
+    }
 
+    public void CheckColision()
+    {
       RaioLIDAR colisao = null;
 
       // Verifica a colisão do sensor LIDAR
       foreach (var ray in LidarColision)
       {
-        var pontoColisao = SensorLIDAR.RayCast((int)X, 
-                                               (int)Y, 
-                                               (int)(X + Math.Cos(Rotation + ray.AngleRadians) * DistanceMax), 
+        var pontoColisao = SensorLIDAR.RayCast((int)X,
+                                               (int)Y,
+                                               (int)(X + Math.Cos(Rotation + ray.AngleRadians) * DistanceMax),
                                                (int)(Y + Math.Sin(Rotation + ray.AngleRadians) * DistanceMax), mapa);
 
         ray.Destiny = pontoColisao;
 
         // Calcula a distancia 
-        ray.Distance = Math.Sqrt(Math.Pow(Math.Abs(ray.Destiny.X - X), 2) + Math.Pow(Math.Abs(ray.Destiny.Y - Y), 2));      
+        ray.Distance = Math.Sqrt(Math.Pow(Math.Abs(ray.Destiny.X - X), 2) + Math.Pow(Math.Abs(ray.Destiny.Y - Y), 2));
 
         // Houve colisao do robo com a parede ?
         if (ray.Distance <= Radius)
@@ -169,7 +179,6 @@ namespace RedeNeuralTreinamento.Model
         X -= Math.Cos(Rotation + colisao.AngleRadians) * Speed;
         Y -= Math.Sin(Rotation + colisao.AngleRadians) * Speed;
       }
-
     }
 
     public void Draw(System.Drawing.Graphics g)
