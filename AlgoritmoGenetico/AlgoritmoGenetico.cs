@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace RedeNeuralTreinamento.AlgoritmoGenetico
 {
+  /// <summary>
+  /// Algoritmo Genético para treinamento das redes neurais e seleção da melhor rede neural
+  /// </summary>
   public class AlgoritmoGenetico
   {
     private readonly Random rand = new Random();
@@ -19,7 +22,7 @@ namespace RedeNeuralTreinamento.AlgoritmoGenetico
 
       for (int gen = 0; gen < generations; gen++)
       {
-        // Avaliar a população
+        // Ordena a população pela pontuação
         var scoredPopulation = population
             .Select(network => (network, score: fitnessFunc(network)))
             .OrderByDescending(pair => pair.score)
@@ -34,7 +37,7 @@ namespace RedeNeuralTreinamento.AlgoritmoGenetico
             .Select(pair => pair.network)
             .ToList();
 
-        // Crossover e Mutação
+        // Cruzamento e Mutação
         population = new List<NeuralNetworkClass>();
         while (population.Count < populationSize)
         {
@@ -50,6 +53,12 @@ namespace RedeNeuralTreinamento.AlgoritmoGenetico
       return population.OrderByDescending(fitnessFunc).First();
     }
 
+    /// <summary>
+    /// Cruzamnento de indivíduos
+    /// </summary>
+    /// <param name="parent1"></param>
+    /// <param name="parent2"></param>
+    /// <returns></returns>
     private NeuralNetworkClass Crossover(NeuralNetworkClass parent1, NeuralNetworkClass parent2)
     {
       NeuralNetworkClass child = new NeuralNetworkClass(parent1.weightsInputHidden.Length, parent1.biasHidden.Length, parent1.biasOutput.Length);
@@ -65,6 +74,11 @@ namespace RedeNeuralTreinamento.AlgoritmoGenetico
       return child;
     }
 
+    /// <summary>
+    /// Mutação de indivíduo
+    /// </summary>
+    /// <param name="network"></param>
+    /// <param name="mutationRate"></param>
     private void Mutate(NeuralNetworkClass network, double mutationRate)
     {
       MutateMatrix(network.weightsInputHidden, mutationRate);
